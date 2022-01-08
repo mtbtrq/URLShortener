@@ -28,7 +28,7 @@ app.post("/create", (req, res) => {
     
         res.send({
             success: true,
-            shortenedURL: `https://dry-tundra-94746.herokuapp.com/${code}`
+            code: code
         })
         return
     } else {
