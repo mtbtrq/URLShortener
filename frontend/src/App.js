@@ -6,23 +6,25 @@ function App() {
     const handleSubmit = async () => {
         const urlEl =  document.getElementById("url");
         const statusEl = document.getElementById("statusEl");
+        const customCodeEl = document.getElementById("customCode");
 
         const createServerURL = "http://localhost:5000/create"
 
         const url = urlEl.value
+        const customCode = customCodeEl.value;
         urlEl.value = "";
+        customCodeEl.value = "";
         
         // Copied from stack overflow :), I'm horrible at regex
-        const urlMatchRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+        const urlMatchRegex = /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi;
         const t = new RegExp(urlMatchRegex);
 
-        const requestBody = {
-            url: url
-        }
+        const requestBody = customCode ? { url: url, customCode: customCode } : { url: url }
 
         if (url.match(t)) {
             if (isError) {
                 statusEl.textContent = "";
+                setError(false);
             }
 
             const request = await fetch(createServerURL, {
@@ -34,8 +36,7 @@ function App() {
             })
 
             const response = await request.json();
-            setError(false);
-            statusEl.textContent = `Success! Your short URL is: http://localhost:5000/${response.code}`
+            if (response.code) statusEl.textContent = `Success! Your short URL is: http://localhost:5000/${response.code}`; else statusEl.textContent = `An error occured! ${response.cause}`
         } else {
             statusEl.textContent = "Invalid URL Entered! Please try again!"
             setError(true);
@@ -47,8 +48,14 @@ function App() {
             <h1 id="mainHeading">URL Shortener</h1>
 
             <h4 id="instructionsHeading">Enter a URL Below to shorten it!</h4>
-            <input required type="url" pattern="https://.*" id="url" autoComplete='off'/>
+
+            <input required type="url" pattern="https://.*" id="url" autoComplete='off' placeholder='Enter a URL'/>
             <br />
+            <br />
+
+            <input type="text" maxLength="10" id="customCode" autoComplete='off' placeholder='Custom Code'/>
+            <br />
+
             <button id="submitButton" onClick={handleSubmit}>Submit</button>
 
             <p id="statusEl"></p>

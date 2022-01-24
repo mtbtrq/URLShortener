@@ -8,12 +8,17 @@ const db = Database("database.db")
 app.get("/:code", (req, res) => {
     const code = req.params.code;
 
-    const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?");
-    const dbData = checkStatement.all(code);
+    try {
+        const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?");
+        const dbData = checkStatement.all(code);
 
-    const url = dbData[0]["url"];
+        const url = dbData[0]["url"];
 
-    return res.redirect(url)
+        return res.redirect(url)
+    }
+    catch (error) {
+        return res.send("Invalid Code!");
+    }
 })
 
 module.exports = app;

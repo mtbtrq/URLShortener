@@ -13,11 +13,29 @@ createTableStatement.run();
 
 app.post("/create", (req, res) => {
     const urlToShorten = req.body.url;
+    const customCode = req.body.customCode;
+
     if (urlToShorten) {
-        let code = getCode(7);
+        let code = getCode();
 
         const selectStatement = db.prepare("SELECT * FROM links WHERE code = ?");
-        const dbData = selectStatement.run(code);
+        const dbData = selectStatement.get(code);
+
+        let dbDataForCustomCode;
+
+        if (customCode) {
+            const selectStatementForCustomCode = db.prepare("SELECT * FROM links WHERE code = ?");
+            dbDataForCustomCode = selectStatementForCustomCode.get(customCode);
+            
+            if (dbDataForCustomCode) {
+                return res.send({
+                    success: false,
+                    cause: "This code is already taken! Please try a different code."
+                })
+            } else {
+                code = customCode;
+            }
+        }
 
         if (dbData) {
             code = getCode();
