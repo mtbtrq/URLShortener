@@ -10,8 +10,9 @@ body {
 }
 
 #url,
-#customCode {
-    outline: 1px solid #0000ff;
+#customCode,
+#enterCodeElement {
+    outline: 1px solid #39adad;
     text-align: center;
 	padding: 5px
 }
@@ -27,9 +28,9 @@ body {
 }
 
 #submitButton {
-    outline: 1px solid #0000ff;
-    margin-top: 10px;
-    border-radius: 5px;
+    outline: 1px solid #39adad;
+    margin-top: 20px;
+    border-radius: 3px;
 }
 
 #errorEl {
@@ -44,4 +45,21 @@ body {
 #mainDiv {
     align-items: center;
     text-align: center;
+}
+
+#statusEl {
+    margin-bottom: 100px;
+}
+
+a:any-link {
+    color: white;
+    transition: 0.5s;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+
+a:any-link:hover {
+    color: #39adad;
+    border: 1px solid #39adad;
+    padding: 5px 5px;
 }

@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = Database("database.db")
 const config = require("../config.json");
 
-const createTableStatement = db.prepare("CREATE TABLE IF NOT EXISTS links (code text primary key, url text)");
+const createTableStatement = db.prepare("CREATE TABLE IF NOT EXISTS links (code text primary key, url text, views integer)");
 createTableStatement.run();
 
 app.post("/create", (req, res) => {
@@ -41,8 +41,8 @@ app.post("/create", (req, res) => {
             code = getCode();
         }
 
-        const insertStatement = db.prepare("INSERT INTO links VALUES (? ,?)");
-        insertStatement.run(code, urlToShorten);
+        const insertStatement = db.prepare("INSERT INTO links VALUES (?, ?, ?)");
+        insertStatement.run(code, urlToShorten, 0);
     
         res.send({
             success: true,

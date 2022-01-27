@@ -14,6 +14,11 @@ app.get("/:code", (req, res) => {
 
         const url = dbData[0]["url"];
 
+        const previousViews = dbData[0]["views"] || 0
+
+        const increaseViewsStatement = db.prepare("UPDATE links SET views = ? WHERE code = ?")
+        increaseViewsStatement.run((previousViews + 1), code)
+
         return res.redirect(url)
     }
     catch (error) {
