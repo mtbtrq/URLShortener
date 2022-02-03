@@ -1,5 +1,5 @@
 <h1>URL Shortener</h1>
-<p>Might not be very efficient if you're hosting it on places like heroku where they give you long links, but if you get a domain and everything, it works 😃👍</p>
+<p>Might not be very efficient if you're hosting it on places like heroku and railway where they give you long links, but if you get a domain and everything, it works 😃👍</p>
 
 <h3>How to run?</h3>
 
