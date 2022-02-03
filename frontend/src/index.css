@@ -11,6 +11,8 @@ body {
 
 #url,
 #customCode,
+#username,
+#password,
 #enterCodeElement {
     outline: 2px solid #39adad;
     text-align: center;
@@ -37,6 +39,18 @@ body {
     border-radius: 9px;
     color: #000000;
     padding: 5px 20px;
+}
+
+#submitButton:hover {
+    background-color: #dbdbdb;
+}
+
+#informationList li {
+    list-style-type: none;
+}
+
+#informationList  {
+    margin-top: 10px;
 }
 
 #errorEl {

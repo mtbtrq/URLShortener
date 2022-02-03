@@ -48,6 +48,7 @@ function Home() {
 
             <input type="text" maxLength="10" id="customCode" autoComplete='off' placeholder='Custom Code'/>
             <br />
+            <br />
 
             <button id="submitButton" onClick={handleSubmit}>Submit</button>
 
