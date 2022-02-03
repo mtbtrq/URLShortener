@@ -14,7 +14,7 @@ function Statistics() {
 			statusEl.textContent = "";
 		}
 
-		const serverURL = "http://localhost:5000/statistics"
+		const serverURL = "https://urlshortener-production-c464.up.railway.app/statistics"
 
 		const requestBody = {
 			code: code

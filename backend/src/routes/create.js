@@ -16,6 +16,12 @@ app.post("/create", (req, res) => {
     const customCode = req.body.customCode;
 
     if (urlToShorten) {
+
+        // Copied from stack overflow :), I'm horrible at regex
+        const urlMatchRegex = /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi;
+        const t = new RegExp(urlMatchRegex);
+
+        if (urlToShorten.match(t)) {
         let code = getCode();
 
         const selectStatement = db.prepare("SELECT * FROM links WHERE code = ?");
@@ -31,11 +37,11 @@ app.post("/create", (req, res) => {
                 return res.send({
                     success: false,
                     cause: "This code is already taken! Please try a different code."
-                })
+                });
             } else {
                 code = customCode;
-            }
-        }
+            };
+        };
 
         if (dbData) {
             code = getCode();
@@ -47,15 +53,24 @@ app.post("/create", (req, res) => {
         res.send({
             success: true,
             code: code
-        })
-        return
+        });
+
+        return;
+        } else {
+            res.send({
+                success: false,
+                cause: "Invalid URL Provided!"
+            });
+            
+            return;
+        };
     } else {
         return res.send({
             success: false,
             cause: "No URL Provided."
-        })
-    }
-})
+        });
+    };
+});
 
 function getCode() {
     var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
