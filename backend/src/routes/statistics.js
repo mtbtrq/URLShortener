@@ -14,8 +14,8 @@ app.post("/statistics", (req, res) => {
         res.send({
             success: false,
             cause: "No Code Provided!"
-        })
-    }
+        });
+    };
     
     const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?");
     const dbData = checkStatement.all(code);
@@ -25,16 +25,16 @@ app.post("/statistics", (req, res) => {
         res.send({
             success: false,
             cause: "No URL could be found with the specified code."
-        })
-        return
-    }
+        });
+        return;
+    };
     
 
     res.send({
         success: true,
         views: dbData[0].views || 0,
         url: dbData[0].url
-    })
-})
+    });
+});
 
 module.exports = app;
