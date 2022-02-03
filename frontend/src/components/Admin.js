@@ -2,7 +2,7 @@ import React from "react";
 
 const Admin = () => {
     const handleClick = async () => {
-        const serverURL = "http://localhost:5000/admin"
+        const serverURL = "https://urlshortener-production-c464.up.railway.app/admin"
 
         const dataBody = {
             username: document.getElementById("password").value,

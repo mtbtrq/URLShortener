@@ -55,6 +55,7 @@ function Home() {
             <p id="statusEl"></p>
 
             <Link to="/statistics" id="viewStatisticsRedirect">View Statistics</Link>
+            <Link to="/admin" id="adminRedirect">Admin Portal</Link>
             
         </div>
     )
