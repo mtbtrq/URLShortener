@@ -14,7 +14,9 @@ function Statistics() {
 			statusEl.textContent = "";
 		}
 
-		const serverURL = "https://urlshortener-production-c464.up.railway.app/statistics"
+		const config = require("../config.json")
+
+		const serverURL = `${config.baseURL}/statistics`
 
 		const requestBody = {
 			code: code

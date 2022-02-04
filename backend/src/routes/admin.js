@@ -26,16 +26,31 @@ app.post("/admin", (req, res) => {
     const password = req.body.password
 
     if (!(username && password)) return res.send({ success: true, cause: "Username or password not provided!" })
+    
+    const dbAdminSelectStatement = db.prepare("SELECT * FROM admins")
+    const adminData = dbAdminSelectStatement.all()
 
-    const selectDataStatement = db.prepare("SELECT * FROM links")
-    const data = selectDataStatement.all()
-
-    res.send({
-        success: true,
-        data: data
-    })
-
-    return
+    if (adminData) {
+        for (const admin of adminData) {
+            if (admin.username == username && admin.password == password) {
+                const selectDataStatement = db.prepare("SELECT * FROM links")
+                const data = selectDataStatement.all()
+            
+                res.status(200).send({
+                    success: true,
+                    data: data
+                })
+            
+                return
+            } else {
+                res.status(400).send({
+                    success: false,
+                    cause: "Invalid Username or Password."
+                })
+                return
+            }
+        }
+    }
 })
 
 module.exports = app

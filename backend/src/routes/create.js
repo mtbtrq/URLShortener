@@ -16,11 +16,11 @@ app.post("/create", (req, res) => {
     const customCode = req.body.customCode
 
     // --------------------------------- Validation ---------------------------------
-    if (!urlToShorten)  return res.send({ success: false, cause: "No URL Provided." })
+    if (!urlToShorten)  return res.status(400).send({ success: false, cause: "No URL Provided." })
 
     const urlMatchRegex = /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi
     const t = new RegExp(urlMatchRegex)
-    if (!urlToShorten.match(t)) return res.send({ success: false, cause: "Invalid URL Provided!" })
+    if (!urlToShorten.match(t)) return res.status(400).send({ success: false, cause: "Invalid URL Provided!" })
     // --------------------------------- End of validation ---------------------------------
 
 
@@ -36,7 +36,7 @@ app.post("/create", (req, res) => {
         dbDataForCustomCode = selectStatementForCustomCode.get(customCode)
         
         if (dbDataForCustomCode) {
-            return res.send({
+            return res.status(400).send({
                 success: false,
                 cause: "This code is already taken! Please try a different code."
             })

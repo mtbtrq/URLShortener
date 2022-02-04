@@ -9,7 +9,9 @@ function Home() {
         const statusEl = document.getElementById("statusEl");
         const customCodeEl = document.getElementById("customCode");
 
-        const createServerURL = "https://urlshortener-production-c464.up.railway.app/create"
+        const config = require("../config.json")
+
+        const createServerURL = `${config.baseURL}/create`
 
         const url = urlEl.value
         const customCode = customCodeEl.value;
@@ -32,7 +34,7 @@ function Home() {
         });
 
         const response = await request.json();
-        if (response.code) statusEl.textContent = `Success! Your short URL is: https://urlshortener-production-c464.up.railway.app/${response.code}`; else statusEl.textContent = `An error occured! ${response.cause}`;
+        if (response.code) statusEl.textContent = `Success! Your short URL is: ${config.baseURL}/${response.code}`; else statusEl.textContent = `An error occured! ${response.cause}`;
 
     }
 

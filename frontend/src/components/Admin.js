@@ -2,11 +2,15 @@ import React from "react";
 
 const Admin = () => {
     const handleClick = async () => {
-        const serverURL = "https://urlshortener-production-c464.up.railway.app/admin"
+        const informationListEl = document.getElementById("informationList")
+        informationListEl.innerHTML = ""
+        const config = require("../config.json")
+
+        const serverURL = `${config.baseURL}/admin`
 
         const dataBody = {
-            username: document.getElementById("password").value,
-            password: document.getElementById("username").value
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
         }
 
         let request = await fetch(serverURL, {
@@ -20,8 +24,6 @@ const Admin = () => {
         request = await request.json()
 
         if (request.success) {
-            const informationListEl = document.getElementById("informationList")
-
             for (const entry of request.data) {
                 const item = document.createElement("li")
                 item.textContent = `Code: ${entry.code} | URL: ${entry.url} | Views: ${entry.views}`

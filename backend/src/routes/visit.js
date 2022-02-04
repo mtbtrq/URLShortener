@@ -21,7 +21,7 @@ app.get("/:code", (req, res) => {
 
         return res.redirect(url)
     } catch (error) {
-        return res.send("Invalid Code!")
+        return res.status(400).send("Invalid Code!")
     }
 })
 
