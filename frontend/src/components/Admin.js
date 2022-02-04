@@ -1,8 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Admin = () => {
     const handleClick = async () => {
         const informationListEl = document.getElementById("informationList")
+        const statusEl = document.getElementById("statusEl")
+        
+        statusEl.classList.remove("error")
+
         informationListEl.innerHTML = ""
         const config = require("../config.json")
 
@@ -13,6 +18,8 @@ const Admin = () => {
             password: document.getElementById("password").value
         }
 
+        statusEl.textContent = "Loading..."
+
         let request = await fetch(serverURL, {
             method: "POST",
             headers: {
@@ -20,6 +27,8 @@ const Admin = () => {
             },
             body: JSON.stringify(dataBody)
         })
+
+        statusEl.textContent = ""
         
         request = await request.json()
 
@@ -29,6 +38,9 @@ const Admin = () => {
                 item.textContent = `Code: ${entry.code} | URL: ${entry.url} | Views: ${entry.views}`
                 informationListEl.appendChild(item)
             }
+        } else {
+            statusEl.classList.add("error")
+            statusEl.textContent = `An error occured! Cause: ${request.cause}`
         }
     }
 
@@ -48,7 +60,11 @@ const Admin = () => {
             <br />
             <br />
 
+            <p id="statusEl"></p>
+
             <ul id="informationList"></ul>
+
+            <Link to="/">Home</Link>
         </div>
     );
 };

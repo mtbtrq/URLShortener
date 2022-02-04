@@ -10,12 +10,12 @@ const db = Database("database.db")
 app.post("/statistics", (req, res) => {
     const code = req.body.code
 
-    if (!code) return res.status(400).send({ success: false, cause: "No Code Provided!" })
+    if (!code) return res.send({ success: false, cause: "No Code Provided!" })
     
     const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?")
     const dbData = checkStatement.all(code)
 
-    if (dbData.length < 1) return res.status(400).send({ success: false, cause: "No URL could be found with the specified code." })
+    if (dbData.length < 1) return res.send({ success: false, cause: "No URL could be found with the specified code." })
 
     res.send({
         success: true,

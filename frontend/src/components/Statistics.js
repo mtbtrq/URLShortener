@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 function Statistics() {
-	const [isError, setError] = useState(false);
-	
 	const handleSubmit = async () => {
 		const codeEl = document.getElementById("enterCodeElement");
 		const code = codeEl.value;
 		const statusEl = document.getElementById("statusEl");
 		codeEl.value = "";
 
-		if (!isError) {
-			statusEl.textContent = "";
-		}
+		statusEl.classList.remove("success")
+		statusEl.classList.remove("error")
+
+		statusEl.textContent = "";
 
 		const config = require("../config.json")
 
@@ -33,12 +32,12 @@ function Statistics() {
 		const request = await requestRaw.json();
 
 		if (request.success) {
+			statusEl.classList.add("success")
 			statusEl.innerHTML = `<b>Views:</b> ${request.views}`;
 			statusEl.innerHTML += `<p><b>URL:</b> ${request.url}</p>`;
-			setError(false);
 		} else {
+			statusEl.classList.add("error")
 			statusEl.textContent = `An error occured! Cause: ${request.cause}`
-			setError(true)
 		}
 	}
 
@@ -52,6 +51,7 @@ function Statistics() {
 		<br />
 
 		<button id="submitButton" onClick={handleSubmit}>Submit</button>
+		<br />
 
 		<p id="statusEl"></p>
 

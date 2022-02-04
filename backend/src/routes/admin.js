@@ -36,14 +36,14 @@ app.post("/admin", (req, res) => {
                 const selectDataStatement = db.prepare("SELECT * FROM links")
                 const data = selectDataStatement.all()
             
-                res.status(200).send({
+                res.send({
                     success: true,
                     data: data
                 })
             
                 return
             } else {
-                res.status(400).send({
+                res.send({
                     success: false,
                     cause: "Invalid Username or Password."
                 })

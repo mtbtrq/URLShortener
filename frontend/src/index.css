@@ -53,8 +53,13 @@ body {
     margin-top: 10px;
 }
 
-#errorEl {
+.error {
     color: red;
+    font-weight: bold;
+}
+
+.success {
+    color: #39adad;
     font-weight: bold;
 }
 

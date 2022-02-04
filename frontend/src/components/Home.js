@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from "react-router-dom"
 
 function Home() {
-    const [isError, setError] = useState(false);
-
     const handleSubmit = async () => {
-        const urlEl =  document.getElementById("url");
-        const statusEl = document.getElementById("statusEl");
-        const customCodeEl = document.getElementById("customCode");
+        const urlEl =  document.getElementById("url")
+        const statusEl = document.getElementById("statusEl")
+        const customCodeEl = document.getElementById("customCode")
 
         const config = require("../config.json")
 
         const createServerURL = `${config.baseURL}/create`
 
+        statusEl.classList.remove("success")
+		statusEl.classList.remove("error")
+
         const url = urlEl.value
-        const customCode = customCodeEl.value;
-        urlEl.value = "";
-        customCodeEl.value = "";
+        const customCode = customCodeEl.value
+        urlEl.value = ""
+        customCodeEl.value = ""
 
         const requestBody = customCode ? { url: url, customCode: customCode } : { url: url }
 
-        if (isError) {
-            statusEl.textContent = "";
-            setError(false);
-        }
+        statusEl.textContent = "Loading..."
 
         const request = await fetch(createServerURL, {
             method: "POST",
@@ -31,11 +29,12 @@ function Home() {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
-        });
+        })
+
+        statusEl.textContent = ""
 
         const response = await request.json();
-        if (response.code) statusEl.textContent = `Success! Your short URL is: ${config.baseURL}/${response.code}`; else statusEl.textContent = `An error occured! ${response.cause}`;
-
+        if (response.code) { statusEl.classList.add("success"); statusEl.textContent = `Success! Your short URL is: ${config.baseURL}/${response.code}` } else { statusEl.classList.add("error"); statusEl.textContent = `An error occured! ${response.cause}` }
     }
 
     return (
@@ -48,11 +47,12 @@ function Home() {
             <br />
             <br />
 
-            <input type="text" maxLength="10" id="customCode" autoComplete='off' placeholder='Custom Code'/>
+            <input type="text" maxLength="20" id="customCode" autoComplete='off' placeholder='Custom Code'/>
             <br />
             <br />
 
             <button id="submitButton" onClick={handleSubmit}>Submit</button>
+            <br />
 
             <p id="statusEl"></p>
 
@@ -63,4 +63,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default Home
