@@ -8,7 +8,7 @@ const config = require("../config.json")
 
 app.get("/:code", (req, res) => {
     const code = req.params.code
-    if (code == "") res.redirect(config.defaultRedirectIfNoCodeProvided)
+    if (code == " " || code == "") return res.redirect(config.defaultRedirectIfNoCodeProvided)
 
     try {
         const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?")
