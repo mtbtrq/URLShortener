@@ -32,6 +32,8 @@ app.post("/create", (req, res) => {
     let dbDataForCustomCode
 
     if (customCode) {
+        if (customCode == " ") return res.send({ success: false, cause: "No custom code provided!" })
+
         const selectStatementForCustomCode = db.prepare("SELECT * FROM links WHERE code = ?")
         dbDataForCustomCode = selectStatementForCustomCode.get(customCode)
 

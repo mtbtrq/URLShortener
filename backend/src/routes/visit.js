@@ -4,9 +4,11 @@ const Database = require("better-sqlite3")
 const app = express.Router()
 app.use(express.urlencoded({ extended:true }))
 const db = Database("database.db")
+const config = require("../config.json")
 
 app.get("/:code", (req, res) => {
     const code = req.params.code
+    if (code == "") res.redirect(config.defaultRedirectIfNoCodeProvided)
 
     try {
         const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?")
