@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended:true }))
 const db = Database("database.db")
 const config = require("../config.json")
 
-app.get("/:code", (req, res) => {
+app.get("/u/:code", (req, res) => {
     const code = req.params.code
     if (code == " " || code == "") return res.redirect(config.defaultRedirectIfNoCodeProvided)
 

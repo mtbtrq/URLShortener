@@ -3,6 +3,7 @@ const cors = require("cors")
 
 const app = express()
 app.use(cors())
+const config = require("./config.json")
 
 const port = process.env.PORT || 5000
 
@@ -17,6 +18,8 @@ app.use("/", visit)
 
 const admin = require("./routes/admin")
 app.use("/", admin)
+
+app.get("/", (req, res) => res.redirect(config.defaultRedirectIfNoCodeProvided))
 
 app.listen(port, () => {
     console.log(`I am listening to requests on port ${port}`)

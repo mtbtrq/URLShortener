@@ -34,7 +34,7 @@ function Home() {
         statusEl.textContent = ""
 
         const response = await request.json();
-        if (response.code) { statusEl.classList.add("success"); statusEl.textContent = `Success! Your short URL is: ${config.baseURL}/${response.code}` } else { statusEl.classList.add("error"); statusEl.textContent = `An error occured! ${response.cause}` }
+        if (response.code) { statusEl.classList.add("success"); statusEl.textContent = `Success! Your short URL is: ${config.baseURL}/u/${response.code}` } else { statusEl.classList.add("error"); statusEl.textContent = `An error occured! ${response.cause}` }
     }
 
     return (
