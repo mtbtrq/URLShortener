@@ -33,6 +33,8 @@ const Admin = () => {
         request = await request.json()
 
         if (request.success) {
+            statusEl.classList.add("success")
+            statusEl.textContent = "Successfully logged in!"
             for (const entry of request.data) {
                 const item = document.createElement("li")
                 item.textContent = `Code: ${entry.code} | URL: ${entry.url} | Views: ${entry.views}`
