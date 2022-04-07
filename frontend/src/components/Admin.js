@@ -83,6 +83,7 @@ const Admin = () => {
             statusEl.classList.add("success")
             statusEl.textContent = "Successfully cleared the database!"
             document.getElementById("informationList").innerHTML = "";
+            document.getElementById("deleteButton").classList.add("hidden");
         }
     }
 
