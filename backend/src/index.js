@@ -19,6 +19,9 @@ app.use("/", visit)
 const admin = require("./routes/admin")
 app.use("/", admin)
 
+const adminDeletePage = require("./routes/delete")
+app.use("/", adminDeletePage)
+
 app.get("/", (req, res) => res.redirect(config.defaultRedirectIfNoCodeProvided))
 
 app.listen(port, () => {

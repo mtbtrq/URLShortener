@@ -17,8 +17,8 @@ const checkIfAccountExist = db.prepare("SELECT * FROM admins WHERE username = ?"
 const checkData = checkIfAccountExist.get(adminUsername)
 
 if (!checkData) {
-    const insertDefaultAccount = db.prepare("INSERT INTO admins (username, password) VALUES (?, ?)")
-    insertDefaultAccount.run(adminUsername, adminPassword)
+    const insertDefaultAccountStatement = db.prepare("INSERT INTO admins (username, password) VALUES (?, ?)")
+    insertDefaultAccountStatement.run(adminUsername, adminPassword)
 }
 
 app.post("/admin", (req, res) => {
