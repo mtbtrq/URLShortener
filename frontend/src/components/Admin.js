@@ -35,11 +35,14 @@ const Admin = () => {
         if (request.success) {
             statusEl.classList.add("success")
             statusEl.textContent = "Successfully logged in!"
-            for (const entry of request.data) {
-                const item = document.createElement("li")
-                item.textContent = `Code: ${entry.code} | URL: ${entry.url} | Views: ${entry.views}`
-                informationListEl.appendChild(item)
-            }
+
+            if (request.data.length > 0) {
+                for (const entry of request.data) {
+                    const item = document.createElement("li")
+                    item.textContent = `Code: ${entry.code} | URL: ${entry.url} | Views: ${entry.views}`
+                    informationListEl.appendChild(item)
+                }
+            } else { const item = document.createElement("li"); item.textContent = "There have been no URLs shortened."; informationListEl.appendChild(item) }
         } else {
             statusEl.classList.add("error")
             statusEl.textContent = `An error occured! Cause: ${request.cause}`
