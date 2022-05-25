@@ -2,5 +2,5 @@
     "shortURLCodeLength": 4,
     "adminPortalUsername": "admin",
     "adminPortalPassword": "admin123",
-    "defaultRedirectIfNoCodeProvided": "https://urlshortener124.up.railway.app/"
+    "defaultRedirectIfNoCodeProvided": "https://urlshortener.up.railway.app/"
 }
