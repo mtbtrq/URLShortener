@@ -5,30 +5,24 @@ const app = express.Router()
 app.use(express.urlencoded({ extended: true }))
 const db = Database("database.db")
 
-app.post("/delete", (req, res) => {
+app.post("/truncate", (req, res) => {
     const username = req.body.username
     const password = req.body.password
-    const code = req.body.code
 
     if (!(username && password)) return res.send({ success: true, cause: "Username or password not provided!" })
 
-    const adminData = db.prepare("SELECT * FROM admins").all()
+    const dbAdminSelectStatement = db.prepare("SELECT * FROM admins")
+    const adminData = dbAdminSelectStatement.all()
 
     for (const admin of adminData) {
         if (admin.username == username && admin.password == password) {
-            
-            const codeData = db.prepare("SELECT * FROM links WHERE code = ?").all(code)
-            if (codeData.length >= 1) {
-                db.prepare("DELETE FROM links WHERE code = ?").run(code)
-                return res.send({
-                    success: true
-                })
-            } else { 
-                return res.send({
-                    success: false,
-                    cause: "No short URL with the specified code found!"
-                })
-            }
+            const truncateTableStatement = db.prepare("DELETE FROM links")
+            truncateTableStatement.run()
+        
+            res.send({
+                success: true
+            })
+            return
         } else {
             res.send({
                 success: false,

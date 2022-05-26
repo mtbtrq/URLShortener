@@ -19,7 +19,10 @@ app.use("/", visit)
 const admin = require("./routes/admin")
 app.use("/", admin)
 
-const adminDeletePage = require("./routes/delete")
+const deleteURL = require("./routes/delete")
+app.use("/", deleteURL)
+
+const adminDeletePage = require("./routes/truncate")
 app.use("/", adminDeletePage)
 
 app.get("/", (req, res) => res.redirect(config.defaultRedirectIfNoCodeProvided))

@@ -9,11 +9,21 @@ body {
     color: white;
 }
 
+.text {
+    font-weight: bold;
+    color: #39adad;
+}
+
+#deleteACodeText {
+    margin-top: 50px;
+}
+
 #url,
 #customCode,
 #username,
 #password,
-#enterCodeElement {
+#enterCodeElement,
+#codeElement {
     outline: 2px solid #39adad;
     text-align: center;
     border-radius: 5px;
@@ -35,20 +45,21 @@ body {
     display: none;
 }
 
-#submitButton {
+#submitButton, #submitRemoveCodeButton {
     outline: 2px solid #39adad;
 }
 
-#submitButton, #deleteButton {
+#submitButton, #deleteButton, #submitRemoveCodeButton {
     border: none;
     background-color: #ffffff;
-    margin-top: 20px;
+    margin-top: 5px;
     border-radius: 9px;
     color: #000000;
     padding: 5px 20px;
 }
 
 #deleteButton {
+    margin-top: 70px;
     outline: 2px solid #ad3939;
 }
 
@@ -56,11 +67,11 @@ body {
     background-color: #dbdbdb;
 }
 
-#informationList li {
+#linksList li {
     list-style-type: none;
 }
 
-#informationList  {
+#linksList  {
     margin-top: 10px;
 }
 
