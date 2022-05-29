@@ -82,7 +82,7 @@ const Admin = () => {
         })
         request = await request.json()
 
-        if (request.success) { 
+        if (request.success) {
             const statusEl = document.getElementById("statusEl")
             statusEl.classList.add("success")
             statusEl.textContent = "Successfully cleared the database!"
