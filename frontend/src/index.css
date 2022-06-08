@@ -38,7 +38,7 @@ body {
 }
 
 #url {
-	padding: 5px
+	width: 225px
 }
 
 .hidden {
@@ -76,7 +76,7 @@ body {
 }
 
 .error {
-    color: red;
+    color: rgb(255, 66, 66);
     font-weight: bold;
 }
 
@@ -99,13 +99,24 @@ body {
 }
 
 a:any-link {
+    color: #39adad;
+    text-decoration: none;
+}
+
+a:any-link:hover {
+    color: white;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+#adminRedirect, #viewStatisticsRedirect, #backHomeRedirect {
     color: white;
     transition: 0.5s;
     text-decoration: none;
     padding: 5px 5px;
 }
 
-a:any-link:hover {
+#viewStatisticsRedirect:hover, #adminRedirect:hover, #backHomeRedirect:hover {
     color: #39adad;
     border: 1px solid #39adad;
     padding: 5px 5px;

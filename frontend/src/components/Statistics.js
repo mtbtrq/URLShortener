@@ -8,38 +8,34 @@ function Statistics() {
 		const statusEl = document.getElementById("statusEl");
 		codeEl.value = "";
 
-		statusEl.classList.remove("success")
-		statusEl.classList.remove("error")
+		statusEl.classList.remove("success");
+		statusEl.classList.remove("error");
 
 		statusEl.textContent = "";
 
-		const config = require("../config.json")
+		const config = require("../config.json");
 
-		const serverURL = `${config.baseURL}/statistics`
+		const serverURL = `${config.baseURL}/statistics`;
 
-		const requestBody = {
-			code: code
-		}
-
-		const requestRaw = await fetch(serverURL, {
+		const responseRaw = await fetch(serverURL, {
 			method: "POST",
-			body: JSON.stringify(requestBody),
+			body: JSON.stringify({ code: code }),
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8'
 			}
 		});
 
-		const request = await requestRaw.json();
+		const response = await responseRaw.json();
 
-		if (request.success) {
-			statusEl.classList.add("success")
-			statusEl.innerHTML = `<b>Views:</b> ${request.views}`;
-			statusEl.innerHTML += `<p><b>URL:</b> ${request.url}</p>`;
+		if (response.success) {
+			statusEl.classList.add("success");
+			statusEl.innerHTML = `<b>Views:</b> ${response.views}`;
+			statusEl.innerHTML += `<p>URL: <a href="${response.url}" target="_blank">${response.url}</a></p>`;
 		} else {
-			statusEl.classList.add("error")
-			statusEl.textContent = `An error occured! Cause: ${request.cause}`
-		}
-	}
+			statusEl.classList.add("error");
+			statusEl.textContent = `An error occured! Cause: ${response.cause}`;
+		};
+	};
 
   return (
 	<div id="mainDiv">
@@ -49,13 +45,14 @@ function Statistics() {
 
 		<input required type="text" id="enterCodeElement" autoComplete='off' placeholder='Enter a Code'/>
 		<br />
+		<br />
 
 		<button id="submitButton" onClick={handleSubmit}>Submit</button>
 		<br />
 
 		<p id="statusEl"></p>
 
-		<Link to="/">Home</Link>
+		<Link to="/" id="backHomeRedirect">Home</Link>
 	</div>
   );
 };
