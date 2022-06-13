@@ -11,8 +11,7 @@ app.get("/u/:code", (req, res) => {
     if (code == " " || code == "") return res.redirect(config.defaultRedirectIfNoCodeProvided)
 
     try {
-        const checkStatement = db.prepare("SELECT * FROM links WHERE code = ?")
-        const dbData = checkStatement.all(code)
+        const dbData = db.prepare("SELECT * FROM links WHERE code = ?").all(code.toLowerCase())
 
         const url = dbData[0]["url"]
 

@@ -65,7 +65,7 @@ app.post("/create", (req, res) => {
 })
 
 function getCode() {
-    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var randomChars = 'abcdefghijklmnopqrstuvwxyz0123456789'
     var result = ''
     for ( var i = 0; i < config.shortURLCodeLength; i++ ) {
         result += randomChars.charAt(Math.floor(Math.random() * randomChars.length))
