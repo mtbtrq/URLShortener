@@ -36,7 +36,7 @@ function Home() {
         const response = await request.json();
         if (response.code) {
             const shortenedURL = `${config.baseURL}/u/${response.code}`
-            statusEl.classList.add("success"); statusEl.innerHTML = `Success! Your short URL is: <a id="shortenedURLHyperlink" href="${shortenedURL}">${shortenedURL}</a>`;
+            statusEl.classList.add("success"); statusEl.innerHTML = `Success! Your short URL is: <a id="shortenedURLHyperlink" href="${shortenedURL}" target="_blank">${shortenedURL}</a>`;
         } else {
             statusEl.classList.add("error"); statusEl.textContent = `An error occured! ${response.cause}` ;
         };

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const config = require("../config.json");
 
 const Admin = () => {
-    const handleClick = async () => {
+    const signIn = async () => {
         const linksListEl = document.getElementById("linksList");
         const statusEl = document.getElementById("statusEl");
         
@@ -63,26 +63,23 @@ const Admin = () => {
     };
 
     const truncateDatabase = async () => {
+        try { if (!(window.prompt("Are you sure you want to truncate the database?\nType 'yes' to confirm").toLowerCase() === "yes")) return }
+        catch { return }
+        
         const username = localStorage.getItem("username");
         const password = localStorage.getItem("password");
 
         const serverURL = `${config.baseURL}/truncate`;
 
-        const dataBody = {
-            username: username,
-            password: password
-        };
-
-        let request = await fetch(serverURL, {
+        const response = await (await fetch(serverURL, {
             method: "POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify(dataBody)
-        });
-        request = await request.json();
+            body: JSON.stringify({ username: username, password: password })
+        })).json();
 
-        if (request.success) {
+        if (response.success) {
             const statusEl = document.getElementById("statusEl");
             statusEl.classList.add("success");
             statusEl.textContent = "Successfully cleared the database!";
@@ -164,7 +161,7 @@ const Admin = () => {
             <br />
             <br />
 
-            <button onClick={handleClick} id="submitButton">Log in</button>
+            <button onClick={signIn} id="submitButton">Log in</button>
             <br />
             <br />
 
