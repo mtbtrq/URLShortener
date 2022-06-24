@@ -31,7 +31,7 @@ app.post("/truncate", (req, res) => {
         } else {
             res.send({
                 success: false,
-                cause: "Invalid Username or Password."
+                cause: "Invalid Username or Password. "
             })
             return
         }
