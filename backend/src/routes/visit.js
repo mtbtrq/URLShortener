@@ -8,7 +8,7 @@ const config = require("../config.json")
 
 app.get("/u/:code", (req, res) => {
     const code = req.params.code
-    if (code == " " || code == "") return res.redirect(config.defaultRedirectIfNoCodeProvided)
+    if (code === " " || code === "") return res.redirect(config.defaultRedirectIfNoCodeProvided)
 
     try {
         const dbData = db.prepare("SELECT * FROM links WHERE code = ?").all(code.toLowerCase())
