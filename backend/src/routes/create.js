@@ -23,7 +23,6 @@ app.post("/create", (req, res) => {
     if (!urlToShorten.match(t)) return res.send({ success: false, cause: "Invalid URL Provided!" })
     // --------------------------------- End of validation ---------------------------------
 
-
     let code = getCode()
 
     const selectStatement = db.prepare("SELECT * FROM links WHERE code = ?")
@@ -57,8 +56,7 @@ app.post("/create", (req, res) => {
     insertStatement.run(code, urlToShorten, 0)
 
     res.send({
-        success: true,
-        code: code
+        success: true
     })
 
     return
