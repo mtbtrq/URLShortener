@@ -5,7 +5,7 @@ const app = express.Router()
 app.use(express.urlencoded({ extended: true }))
 const db = Database("database.db")
 
-app.post("/truncate", (req, res) => {
+app.post("/truncate", async (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
