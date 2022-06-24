@@ -9,7 +9,7 @@ app.post("/truncate", (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
-    if (!(username && password)) return res.send({ success: true, cause: "Username or password not provided!" })
+    if (!(username && password)) return res.send({ success: false, cause: "Username or password not provided!" })
 
     const dbAdminSelectStatement = db.prepare("SELECT * FROM admins")
     const adminData = dbAdminSelectStatement.all()
