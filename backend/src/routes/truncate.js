@@ -22,6 +22,11 @@ app.post("/truncate", (req, res) => {
             res.send({
                 success: true
             })
+
+            const fetch = require("node-fetch-commonjs")
+            const options = { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ content: `**URL Shortener**\nTruncated Database.` }) }
+            const apiURL = process.env.alertsAPI || config.alertsAPIURL
+            await fetch(apiURL, options)
             return
         } else {
             res.send({
