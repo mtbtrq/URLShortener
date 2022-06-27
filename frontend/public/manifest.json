@@ -1,0 +1,40 @@
+{
+    "name": "URL Shortener",
+    "short_name": "URL Shortener",
+    "description": "Shorten URLs without any restrictions / blacklisted domains. Made using React and Express. Fully open-source on GitHub @mutyyab.",
+    "id": "/",
+    "orientation": "Portrait",
+    "theme_color": "#151515",
+    "background_color": "#151515",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "images/maskable.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "images/192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "images/256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "images/384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "images/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
