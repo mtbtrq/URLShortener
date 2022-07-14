@@ -13,7 +13,7 @@ createTableStatement.run()
 
 app.post("/create", (req, res) => {
     const urlToShorten = req.body.url
-    const customCode = req.body.code
+    const customCode = req.body.customCode
 
     if (!urlToShorten)  return res.send({ success: false, cause: "No URL Provided." })
 
