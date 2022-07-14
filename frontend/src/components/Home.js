@@ -20,7 +20,7 @@ function Home() {
             urlEl.value = "";
             customCodeEl.value = "";
 
-            const requestBody = customCode ? { url: url, code: customCode } : { url: url };
+            const requestBody = customCode ? { url: url, customCode: customCode } : { url: url };
 
             statusEl.textContent = "Loading...";
 
