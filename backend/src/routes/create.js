@@ -13,15 +13,9 @@ createTableStatement.run()
 
 app.post("/create", (req, res) => {
     const urlToShorten = req.body.url
-    const customCode = req.body.customCode
+    const customCode = req.body.code
 
-    // --------------------------------- Validation ---------------------------------
     if (!urlToShorten)  return res.send({ success: false, cause: "No URL Provided." })
-
-    const urlMatchRegex = /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)?/gi
-    const t = new RegExp(urlMatchRegex)
-    if (!urlToShorten.match(t)) return res.send({ success: false, cause: "Invalid URL Provided!" })
-    // --------------------------------- End of validation ---------------------------------
 
     let code = getCode()
 
@@ -31,7 +25,7 @@ app.post("/create", (req, res) => {
     let dbDataForCustomCode
 
     if (customCode) {
-        if (customCode == " ") return res.send({ success: false, cause: "No custom code provided!" })
+        if (customCode.strip() == "") return res.send({ success: false, cause: "No custom code provided!" })
 
         const selectStatementForCustomCode = db.prepare("SELECT * FROM links WHERE code = ?")
         dbDataForCustomCode = selectStatementForCustomCode.get(customCode)
@@ -56,7 +50,8 @@ app.post("/create", (req, res) => {
     insertStatement.run(code, urlToShorten, 0)
 
     res.send({
-        success: true
+        success: true,
+        code: code
     })
 
     return
