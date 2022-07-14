@@ -20,7 +20,7 @@ function Home() {
             urlEl.value = "";
             customCodeEl.value = "";
 
-            const requestBody = customCode ? { url: url, customCode: customCode } : { url: url };
+            const requestBody = customCode ? { url: url, code: customCode } : { url: url };
 
             statusEl.textContent = "Loading...";
 
@@ -40,6 +40,10 @@ function Home() {
                 statusEl.classList.add("success"); statusEl.innerHTML = `Success! Your short URL is: <a id="shortenedURLHyperlink" href="${shortenedURL}" target="_blank">${shortenedURL}</a>`;
             } else {
                 statusEl.classList.add("error"); statusEl.textContent = `An error occured! ${response.cause}`;
+                console.log("Request:")
+                console.log(request)
+                console.log("Response:")
+                console.log(response)
             };
         } catch (err) {
             console.log(err);
