@@ -15,8 +15,6 @@ app.post("/create", (req, res) => {
     const urlToShorten = req.body.url
     const customCode = req.body.code
 
-    console.log(customCode)
-
     if (!urlToShorten) return res.send({ success: false, cause: "No URL Provided." })
 
     let code = getCode()
@@ -27,7 +25,7 @@ app.post("/create", (req, res) => {
     let dbDataForCustomCode
 
     if (customCode) {
-        if (customCode.strip() == "") return res.send({ success: false, cause: "No custom code provided!" })
+        if (customCode.trim() == "") return res.send({ success: false, cause: "No custom code provided!" })
 
         const selectStatementForCustomCode = db.prepare("SELECT * FROM links WHERE code = ?")
         dbDataForCustomCode = selectStatementForCustomCode.get(customCode)
